@@ -23,6 +23,36 @@ export const getViaje = async (req, res) => {
   }
 };
 
+export const getViajeOne = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const viajeOne = await Viaje.findOne({
+      where:{
+        id: id
+      }
+    });
+    res.json(viajeOne);
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
+export const getFiltroViaje = async (req, res) => {
+  try {
+    const { origen, destino, fecha } = req.params;
+    const {count, rows} = await Viaje.findAndCountAll({
+      where:{
+        origen: origen,
+        destino: destino,
+        fecha: fecha
+      }
+    });
+    res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
 export const createViaje = async (req, res) => {
   const {
     idEmpresa,

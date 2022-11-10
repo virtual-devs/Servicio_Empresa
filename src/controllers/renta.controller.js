@@ -9,6 +9,22 @@ export const getRentas = async (req, res) => {
   }
 };
 
+export const getFiltroRenta = async (req, res) => {
+  try {
+    const { asientos, transmision, aire } = req.params;
+    const {count, rows} = await Renta.findAndCountAll({
+      where:{
+        asientos: asientos,
+        transmision: transmision,
+        aire: aire
+      }
+    });
+    res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
 export const getRenta = async (req, res) => {
   try {
     const { id } = req.params;
@@ -18,6 +34,20 @@ export const getRenta = async (req, res) => {
       }
     });
     res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
+export const getRentaOne = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const rentaOne = await Renta.findOne({
+      where:{
+        id: id
+      }
+    });
+    res.json(rentaOne);
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
   }

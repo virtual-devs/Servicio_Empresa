@@ -26,7 +26,7 @@ export const Renta = sequelize.define(
     },
 
     aire: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 
@@ -46,7 +46,7 @@ export const Renta = sequelize.define(
     },
 
     disponible: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 

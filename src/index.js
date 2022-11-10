@@ -1,7 +1,7 @@
 import app from "./app.js";
 import { sequelize } from "./database/database.js";
-// import './models/Renta.js'
-// import './models/Viaje.js'
+// import './models/HistorialRenta.js'
+// import './models/HistorialViaje.js'
 
 async function main() {
   try {
