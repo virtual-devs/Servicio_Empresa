@@ -53,6 +53,21 @@ export const getFiltroViaje = async (req, res) => {
   }
 };
 
+export const getFiltroViajeFecha = async (req, res) => {
+  try {
+    const {fecha} = req.params;
+    const {count, rows} = await Viaje.findAndCountAll({
+      where:{
+        fecha: fecha
+      }
+    });
+    res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
+
 export const createViaje = async (req, res) => {
   const {
     idEmpresa,
