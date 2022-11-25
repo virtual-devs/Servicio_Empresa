@@ -1,4 +1,5 @@
 import { Viaje } from "../models/Viaje.js";
+import { Op } from "sequelize";
 
 export const getViajes = async (req, res) => {
   try {
@@ -15,7 +16,9 @@ export const getViaje = async (req, res) => {
     const { count, rows } = await Viaje.findAndCountAll({
       where: {
         idEmpresa: id,
+        asientosDisp: {[Op.gt]: 0}
       },
+      
     });
     res.json({ count, rows });
   } catch (error) {
@@ -130,6 +133,39 @@ export const updateViaje = async (req, res) => {
         return res.status(500).json({ massage: error.massage });
       }
 };
+
+export const updateViajeAsientos = async (req, res) => {
+  try {
+      const { id } = req.params;
+      const { ocupado } = req.params;
+      const {
+          origen,
+          destino,
+          fecha,
+          hora,
+          precio,
+          asientos,
+          asientosDisp,
+          imagen
+      } = req.body;
+  
+      const viaje = await Viaje.findByPk(id);
+      viaje.origen = origen
+      viaje.destino = destino
+      viaje.fecha = fecha
+      viaje.hora = hora
+      viaje.precio = precio
+      viaje.asientos = asientos
+      viaje.asientosDisp = asientosDisp - ocupado
+      viaje.imagen = imagen
+      await viaje.save()
+      res.json(viaje);
+  
+    } catch (error) {
+      return res.status(500).json({ massage: error.massage });
+    }
+};
+
 
 export const deleteViaje = async (req, res) => {
   try {

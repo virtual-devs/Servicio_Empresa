@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Renta } from "../models/Renta.js";
 
 export const getRentas = async (req, res) => {
@@ -39,6 +40,18 @@ export const getRenta = async (req, res) => {
   }
 };
 
+export const getRentaPrecio = async (req, res) => {
+  try {
+    const {count, rows} = await Renta.findAndCountAll({
+      where:{
+        precio: {[Op.lte]: 1000}
+      }
+    });
+    res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
 export const getRentaOne = async (req, res) => {
   try {
     const { id } = req.params;
