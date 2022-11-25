@@ -26,6 +26,20 @@ export const getViaje = async (req, res) => {
   }
 };
 
+export const getViajesDisp = async (req, res) => {
+  try {
+    const { count, rows } = await Viaje.findAndCountAll({
+      where: {
+        asientosDisp: {[Op.gt]: 0}
+      },
+      
+    });
+    res.json({ count, rows });
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
 export const getViajeOne = async (req, res) => {
   try {
     const { id } = req.params;

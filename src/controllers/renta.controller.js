@@ -10,6 +10,19 @@ export const getRentas = async (req, res) => {
   }
 };
 
+export const getRentasDisp = async (req, res) => {
+  try {
+    const {count, rows} = await Renta.findAndCountAll({
+      where:{
+        disponible: "DISPONIBLE"
+      }
+    });
+    res.json({count, rows});
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
 export const getFiltroRenta = async (req, res) => {
   try {
     const { asientos, transmision, aire } = req.params;
@@ -31,7 +44,8 @@ export const getRenta = async (req, res) => {
     const { id } = req.params;
     const {count, rows} = await Renta.findAndCountAll({
       where:{
-        idEmpresa: id
+        idEmpresa: id,
+        disponible: "DISPONIBLE"
       }
     });
     res.json({count, rows});
@@ -120,6 +134,37 @@ export const updateRentas = async (req, res) => {
     renta.imagen = imagen
     renta.detalles = detalles
     renta.disponible = disponible
+    renta.precio = precio
+    await renta.save()
+    res.json(renta);
+
+  } catch (error) {
+    return res.status(500).json({ massage: error.massage });
+  }
+};
+
+export const updateRentasDisp = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      asientos,
+      transmision,
+      aire,
+      modelo,
+      imagen,
+      detalles,
+      disponible,
+      precio,
+    } = req.body;
+
+    const renta = await Renta.findByPk(id);
+    renta.asientos = asientos
+    renta.transmision = transmision
+    renta.aire = aire
+    renta.modelo = modelo
+    renta.imagen = imagen
+    renta.detalles = detalles
+    renta.disponible = "NO DISPONIBLE"
     renta.precio = precio
     await renta.save()
     res.json(renta);
