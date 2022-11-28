@@ -4,6 +4,7 @@ import { Renta } from "../models/Renta.js";
 export const getRentas = async (req, res) => {
   try {
     const rentas = await Renta.findAll();
+    rentas.reverse();
     res.json(rentas);
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -17,6 +18,7 @@ export const getRentasDisp = async (req, res) => {
         disponible: "DISPONIBLE"
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -33,6 +35,7 @@ export const getFiltroRenta = async (req, res) => {
         aire: aire
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -48,6 +51,7 @@ export const getRenta = async (req, res) => {
         disponible: "DISPONIBLE"
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -61,6 +65,7 @@ export const getRentaPrecio = async (req, res) => {
         precio: {[Op.lte]: 1000}
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });

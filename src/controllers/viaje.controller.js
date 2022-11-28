@@ -4,6 +4,7 @@ import { Op } from "sequelize";
 export const getViajes = async (req, res) => {
   try {
     const viajes = await Viaje.findAll();
+    viajes.reverse();
     res.json(viajes);
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -20,6 +21,7 @@ export const getViaje = async (req, res) => {
       },
       
     });
+    rows.reverse();
     res.json({ count, rows });
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -34,6 +36,7 @@ export const getViajesDisp = async (req, res) => {
       },
       
     });
+    rows.reverse();
     res.json({ count, rows });
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -64,6 +67,7 @@ export const getFiltroViaje = async (req, res) => {
         fecha: fecha
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
@@ -78,6 +82,7 @@ export const getFiltroViajeFecha = async (req, res) => {
         fecha: fecha
       }
     });
+    rows.reverse();
     res.json({count, rows});
   } catch (error) {
     return res.status(500).json({ massage: error.massage });
