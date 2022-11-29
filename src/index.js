@@ -1,7 +1,5 @@
 import app from "./app.js";
 import { sequelize } from "./database/database.js";
-// import './models/HistorialRenta.js'
-// import './models/HistorialViaje.js'
 import {PORT} from './config.js'
 
 async function main() {
@@ -16,11 +14,3 @@ async function main() {
 }
 
 main();
-
-// app.set('port', process.env.PORT || 3000);
-
-// app.use(express.json());
-
-// app.listen(app.get('port'), () => {
-//     console.log(`Server on port ${app.get('port')}`);
-// });

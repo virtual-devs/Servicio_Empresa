@@ -24,7 +24,7 @@ export const getHistorialRE = async (req, res) => {
     const { id } = req.params;
     const { count, rows } = await HistorialR.findAndCountAll({
       where: {
-        idEmpresa: id,
+        idUser: id,
       },
     });
     rows.reverse();
@@ -39,7 +39,7 @@ export const getHistorialVE = async (req, res) => {
     const { id } = req.params;
     const { count, rows } = await HistorialV.findAndCountAll({
       where: {
-        idEmpresa: id,
+        idUser: id,
       },
     });
     rows.reverse();
@@ -50,13 +50,13 @@ export const getHistorialVE = async (req, res) => {
 };
 
 export const createHistorialR = async (req, res) => {
-  const { idEmpresa, idRenta, idUser, fecha, dias, total } = req.body;
+  const { idUser, nombreEmpresa, nombre, fecha, dias, total } = req.body;
 
   try {
     const newHistorialR = await HistorialR.create({
-      idEmpresa,
-      idRenta,
       idUser,
+      nombreEmpresa,
+      nombre,
       fecha,
       dias,
       total: dias*total,
@@ -69,15 +69,20 @@ export const createHistorialR = async (req, res) => {
 };
 
 export const createHistorialV = async (req, res) => {
-  const { idEmpresa, idViaje, idUser, fecha, hora } = req.body;
+  const { idUser, nombreEmpresa, nombre, fecha, hora, fechaSalida, horaSalida, origen, destino, total} = req.body;
 
   try {
     const newHistorialV = await HistorialV.create({
-      idEmpresa,
-      idViaje,
       idUser,
+      nombreEmpresa,
+      nombre,
       fecha,
       hora,
+      fechaSalida,
+      horaSalida,
+      origen,
+      destino,
+      total
     });
 
     res.json(newHistorialV);
