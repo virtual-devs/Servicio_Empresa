@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const verifyToken = async (req, res, next) => {
   try {
-    let url = "http://localhost:4000/verifyA";
+    let url = "http://3.213.253.209/verifyA";
 
     let config = {
       headers: {
