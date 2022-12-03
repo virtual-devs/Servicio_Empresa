@@ -157,26 +157,26 @@ export const updateViajeAsientos = async (req, res) => {
   try {
       const { id } = req.params;
       const { ocupado } = req.params;
-      const {
-          origen,
-          destino,
-          fecha,
-          hora,
-          precio,
-          asientos,
-          asientosDisp,
-          imagen
-      } = req.body;
+      // const {
+      //     origen,
+      //     destino,
+      //     fecha,
+      //     hora,
+      //     precio,
+      //     asientos,
+      //     asientosDisp,
+      //     imagen
+      // } = req.body;
   
       const viaje = await Viaje.findByPk(id);
-      viaje.origen = origen
-      viaje.destino = destino
-      viaje.fecha = fecha
-      viaje.hora = hora
-      viaje.precio = precio
-      viaje.asientos = asientos
+      // viaje.origen = origen
+      // viaje.destino = destino
+      // viaje.fecha = fecha
+      // viaje.hora = hora
+      // viaje.precio = precio
+      // viaje.asientos = asientos
       viaje.asientosDisp = asientosDisp - ocupado
-      viaje.imagen = imagen
+      // viaje.imagen = imagen
       await viaje.save()
       res.json(viaje);
   

@@ -151,26 +151,8 @@ export const updateRentas = async (req, res) => {
 export const updateRentasDisp = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      asientos,
-      transmision,
-      aire,
-      modelo,
-      imagen,
-      detalles,
-      disponible,
-      precio,
-    } = req.body;
-
     const renta = await Renta.findByPk(id);
-    renta.asientos = asientos
-    renta.transmision = transmision
-    renta.aire = aire
-    renta.modelo = modelo
-    renta.imagen = imagen
-    renta.detalles = detalles
     renta.disponible = "NO DISPONIBLE"
-    renta.precio = precio
     await renta.save()
     res.json(renta);
 
