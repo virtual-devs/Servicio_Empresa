@@ -160,7 +160,7 @@ export const updateViajeAsientos = async (req, res) => {
 
       const viaje = await Viaje.findByPk(id);
 
-      viaje.asientosDisp = asientosDisp - ocupado
+      viaje.asientosDisp = viaje.asientosDisp - ocupado
       await viaje.save()
       res.json(viaje);
   
