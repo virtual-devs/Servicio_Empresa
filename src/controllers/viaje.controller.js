@@ -79,7 +79,8 @@ export const getFiltroViajeFecha = async (req, res) => {
     const {fecha} = req.params;
     const {count, rows} = await Viaje.findAndCountAll({
       where:{
-        fecha: fecha
+        fecha: fecha,
+        asientosDisp: {[Op.gt]: 0}
       }
     });
     rows.reverse();
